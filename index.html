@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpinalSync Education Framework</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>SpinalSync</h1>
+    <nav class="tabs">
+      <button data-tab="dashboard" class="active">Dashboard</button>
+      <button data-tab="modules">Modules</button>
+      <button data-tab="assessments">Assessments</button>
+      <button data-tab="resources">Resources</button>
+      <button data-tab="progress">Progress</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <section id="dashboard" class="tab active">
+      <div class="cards">
+        <a class="card" data-action="resume">Resume next module</a>
+        <a class="card" data-action="protocols">Emergency protocols</a>
+        <div class="kpis">
+          <div class="kpi"><span id="kpi-modules">0</span><label>Modules</label></div>
+          <div class="kpi"><span id="kpi-complete">0</span><label>Completed</label></div>
+          <div class="kpi"><span id="kpi-pending">0</span><label>Pending quizzes</label></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modules" class="tab">
+      <ul id="module-list" class="list"></ul>
+      <article id="module-detail" class="detail hidden">
+        <h2 id="md-title"></h2>
+        <p id="md-summary"></p>
+        <h3>Objectives</h3>
+        <div id="md-objectives"></div>
+        <h3>Interactive</h3>
+        <ul id="md-interactive" class="list"></ul>
+        <h3>Assessments</h3>
+        <ul id="md-assessments" class="list"></ul>
+        <h3>Related Modules</h3>
+        <ul id="md-related" class="list"></ul>
+      </article>
+    </section>
+
+    <section id="assessments" class="tab">
+      <div id="assessment-container"></div>
+    </section>
+
+    <section id="resources" class="tab">
+      <ul id="resource-list" class="list"></ul>
+    </section>
+
+    <section id="progress" class="tab">
+      <div id="progress-body"></div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
