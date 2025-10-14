@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, use } from "react"
+import { useState, useEffect, use, useCallback } from "react"
 import { getSubModuleById } from "@/lib/modules-data"
 import { QuizQuestion } from "@/components/quiz-question"
 import { QuizResults } from "@/components/quiz-results"
@@ -30,31 +30,36 @@ export default function AssessmentPage({ params }: AssessmentPageProps) {
     notFound()
   }
 
-  const handleAnswer = (isCorrect: boolean) => {
-    if (!answeredQuestions[currentQuestionIndex]) {
-      if (isCorrect) {
-        setScore(score + 1)
+  const handleAnswer = useCallback(
+    (isCorrect: boolean) => {
+      if (!answeredQuestions[currentQuestionIndex]) {
+        if (isCorrect) {
+          setScore((prev) => prev + 1)
+        }
+        setAnsweredQuestions((prev) => {
+          const updated = [...prev]
+          updated[currentQuestionIndex] = true
+          return updated
+        })
       }
-      const newAnswered = [...answeredQuestions]
-      newAnswered[currentQuestionIndex] = true
-      setAnsweredQuestions(newAnswered)
-    }
-  }
+    },
+    [answeredQuestions, currentQuestionIndex],
+  )
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentQuestionIndex < subModule.assessment_questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setCurrentQuestionIndex((prev) => prev + 1)
     } else {
       setShowResults(true)
     }
-  }
+  }, [currentQuestionIndex, subModule.assessment_questions.length])
 
-  const handleRetry = () => {
+  const handleRetry = useCallback(() => {
     setCurrentQuestionIndex(0)
     setScore(0)
     setShowResults(false)
     setAnsweredQuestions(new Array(subModule.assessment_questions.length).fill(false))
-  }
+  }, [subModule.assessment_questions.length])
 
   useEffect(() => {
     if (answeredQuestions[currentQuestionIndex]) {
@@ -63,7 +68,8 @@ export default function AssessmentPage({ params }: AssessmentPageProps) {
       }, 3000)
       return () => clearTimeout(timer)
     }
-  }, [answeredQuestions, currentQuestionIndex])
+    return undefined
+  }, [answeredQuestions, currentQuestionIndex, handleNext])
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,7 +92,6 @@ export default function AssessmentPage({ params }: AssessmentPageProps) {
               score={score}
               totalQuestions={subModule.assessment_questions.length}
               subModuleId={subModule.id}
-              subModuleTitle={subModule.title}
               onRetry={handleRetry}
             />
           ) : (

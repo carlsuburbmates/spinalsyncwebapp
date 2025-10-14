@@ -10,11 +10,10 @@ interface QuizResultsProps {
   score: number
   totalQuestions: number
   subModuleId: string
-  subModuleTitle: string
   onRetry: () => void
 }
 
-export function QuizResults({ score, totalQuestions, subModuleId, subModuleTitle, onRetry }: QuizResultsProps) {
+export function QuizResults({ score, totalQuestions, subModuleId, onRetry }: QuizResultsProps) {
   const percentage = Math.round((score / totalQuestions) * 100)
   const passed = percentage >= 80
 

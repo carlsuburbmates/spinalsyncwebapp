@@ -129,7 +129,7 @@ export function RespiratoryAssessment({ questions = defaultQuestions, onComplete
                   onClick={() => updateResponse(choiceValue)}
                 >
                   <span>{option}</span>
-                  {selected && <Badge variant="primary">Selected</Badge>}
+                  {selected && <Badge variant="secondary">Selected</Badge>}
                 </button>
               )
             })}

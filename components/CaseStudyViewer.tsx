@@ -153,7 +153,6 @@ export function CaseStudyViewer({ caseStudy, onComplete }: CaseStudyViewerProps)
             <div className="space-y-4">
               {questions.map((question, index) => {
                 const selectedAnswer = answers[question.id]
-                const correct = selectedAnswer === question.correctAnswer
 
                 return (
                   <Card key={question.id} className="border-muted">
@@ -224,7 +223,7 @@ export function CaseStudyViewer({ caseStudy, onComplete }: CaseStudyViewerProps)
                     onClick={() => handleAnswerSelect(currentQuestion.id, optionIndex)}
                   >
                     <span>{option}</span>
-                    {selected && <Badge variant="primary">Selected</Badge>}
+                    {selected && <Badge variant="secondary">Selected</Badge>}
                   </button>
                 )
               })}

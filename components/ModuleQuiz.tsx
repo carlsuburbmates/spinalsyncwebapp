@@ -17,7 +17,6 @@ export const ModuleQuiz: React.FC<ModuleQuizProps> = ({ questions, title }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const handleAnswerSelect = (answerIndex: number) => {
     const newAnswers = [...selectedAnswers];
@@ -29,7 +28,6 @@ export const ModuleQuiz: React.FC<ModuleQuizProps> = ({ questions, title }) => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      setSubmitted(true);
       setShowResults(true);
     }
   };
@@ -48,7 +46,6 @@ export const ModuleQuiz: React.FC<ModuleQuizProps> = ({ questions, title }) => {
     setCurrentQuestion(0);
     setSelectedAnswers([]);
     setShowResults(false);
-    setSubmitted(false);
   };
 
   if (showResults) {

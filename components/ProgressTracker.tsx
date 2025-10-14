@@ -9,13 +9,9 @@ interface Module {
 
 interface ProgressTrackerProps {
   modules: Module[];
-  onModuleComplete: (moduleId: string, score: number) => void;
 }
 
-export const ProgressTracker: React.FC<ProgressTrackerProps> = ({ 
-  modules, 
-  onModuleComplete 
-}) => {
+export const ProgressTracker: React.FC<ProgressTrackerProps> = ({ modules }) => {
   const completedModules = modules.filter(m => m.completed).length;
   const totalModules = modules.length;
   const progressPercentage = Math.round((completedModules / totalModules) * 100);

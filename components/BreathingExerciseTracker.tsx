@@ -97,7 +97,7 @@ export function BreathingExerciseTracker({ exercises, onExerciseComplete }: Brea
             <p className="text-sm font-medium">
               Completed Exercises: {overallCompleted} / {exercises.length}
             </p>
-            <Badge variant={overallProgress === 100 ? "success" : "secondary"}>{overallProgress}%</Badge>
+            <Badge variant={overallProgress === 100 ? "default" : "secondary"}>{overallProgress}%</Badge>
           </div>
           <Progress value={overallProgress} className="h-2" />
         </div>
@@ -121,7 +121,7 @@ export function BreathingExerciseTracker({ exercises, onExerciseComplete }: Brea
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{exercise.name}</CardTitle>
                     {exercise.completed ? (
-                      <Badge variant="success">Completed</Badge>
+                      <Badge variant="default">Completed</Badge>
                     ) : (
                       <Badge variant="outline">{formatTime(exercise.duration)}</Badge>
                     )}
