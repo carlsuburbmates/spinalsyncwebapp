@@ -11,6 +11,144 @@ export const modulesData: Module[] = [
     order: 1,
     sub_modules: [
       {
+        id: "1-a",
+        module_id: 1,
+        title: "Understanding Neurogenic Bladder",
+        description:
+          "Foundational knowledge on neurogenic bladder dysfunction after spinal cord injury, including injury-level effects, management priorities, and warning signs",
+        metadata: {
+          injury_level: "All",
+          duration: 5,
+          priority: "Critical",
+          difficulty_level: "Novice",
+        },
+        content: [
+          {
+            type: "paragraph",
+            content:
+              "Following a spinal cord injury (SCI), communication between the brain, spinal cord, and bladder can be disrupted. This disruption leads to neurogenic bladder, where bladder filling or emptying no longer follows normal patterns.",
+          },
+          {
+            type: "heading",
+            content: "How Spinal Cord Injury Affects Bladder Function",
+            level: 2,
+          },
+          {
+            type: "paragraph",
+            content:
+              "In people without SCI, the bladder stores urine until messages travel to the brain signalling the need to void. After SCI, that loop is interrupted. The specific impact depends on injury level, completeness, overall health, and time since injury.",
+          },
+          {
+            type: "list",
+            content: [
+              "Injury level: Cervical, thoracic, lumbar, or sacral involvement changes bladder control differently",
+              "Injury completeness: Complete versus incomplete injuries influence sensation and motor control",
+              "Individual factors: Age, co-morbidities, and recovery trajectory alter bladder presentation",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Types of Neurogenic Bladder",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Spastic (Hyperreflexic) bladder (injuries above the sacral level): Involuntary bladder contractions, reduced bladder capacity, sudden urgency, and higher bladder pressures",
+              "Flaccid (Areflexic) bladder (sacral injuries): Bladder fails to contract, incomplete emptying, reduced bladder sensation, and risk of overdistension",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Why Effective Bladder Management Matters",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Protect kidney function by avoiding high bladder pressures",
+              "Reduce urinary tract infection risk",
+              "Maintain skin integrity around catheter sites",
+              "Preserve independence and daily quality of life",
+              "Prevent autonomic dysreflexia in injuries at or above T6",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Key Principles of Neurogenic Bladder Care",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Ensure regular, complete bladder emptying",
+              "Maintain low bladder pressures through appropriate techniques",
+              "Monitor closely for urinary tract infections",
+              "Track kidney function with routine reviews",
+              "Select the management method that best suits the individual’s abilities and risks",
+            ],
+          },
+          {
+            type: "heading",
+            content: "When to Seek Medical Advice",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Signs of UTI: Fever, cloudy or strong-smelling urine, increased spasticity",
+              "Difficulty performing usual bladder emptying routine",
+              "Presence of blood in the urine",
+              "New leakage or urinary retention",
+              "Symptoms of autonomic dysreflexia during bladder care (severe headache, flushing, sweating)",
+            ],
+          },
+        ],
+        learning_objectives: [
+          "Explain how spinal cord injury alters normal bladder communication pathways",
+          "Differentiate between spastic and flaccid neurogenic bladder presentations",
+          "Describe why bladder management is critical for renal health, infection prevention, and quality of life",
+          "Identify red flags that require urgent clinical review",
+        ],
+        assessment_questions: [
+          {
+            id: "1-a-q1",
+            question: "What is neurogenic bladder?",
+            options: [
+              "A bladder infection common after spinal cord injury",
+              "Bladder dysfunction caused by disrupted nerve communication after spinal cord injury",
+              "A type of bladder surgery required after spinal cord injury",
+              "Normal bladder function associated with ageing",
+            ],
+            correct_answer: "Bladder dysfunction caused by disrupted nerve communication after spinal cord injury",
+            explanation:
+              "Neurogenic bladder occurs when nervous system damage from SCI disrupts the messages that control bladder filling and emptying.",
+          },
+          {
+            id: "1-a-q2",
+            question:
+              "Which neurogenic bladder type is characterised by involuntary bladder contractions and difficulty storing urine?",
+            options: ["Flaccid bladder", "Areflexic bladder", "Spastic bladder", "Normal bladder"],
+            correct_answer: "Spastic bladder",
+            explanation:
+              "Spastic (hyperreflexic) bladder typically follows injuries above the sacral level, causing involuntary contractions and reduced storage capacity.",
+          },
+          {
+            id: "1-a-q3",
+            question: "Why is proactive neurogenic bladder management important?",
+            options: [
+              "To reduce appointment frequency",
+              "To prevent kidney damage and urinary tract infections",
+              "To eliminate catheter use entirely",
+              "To restore normal bladder sensation",
+            ],
+            correct_answer: "To prevent kidney damage and urinary tract infections",
+            explanation:
+              "Maintaining low bladder pressures and complete emptying protects kidneys and reduces infection risk, preserving long-term health.",
+          },
+        ],
+      },
+      {
         id: "1-b",
         module_id: 1,
         title: "Catheterization Techniques",
@@ -416,6 +554,173 @@ export const modulesData: Module[] = [
     ],
   },
   {
+    module_id: 5,
+    title: "Pain Management",
+    category: "Core",
+    summary:
+      "Comprehensive pain education covering neuropathic and nociceptive pain mechanisms, assessment, and the biopsychosocial approach to management",
+    priority: "Important",
+    order: 5,
+    sub_modules: [
+      {
+        id: "5-a",
+        module_id: 5,
+        title: "Understanding Pain After SCI",
+        description:
+          "Explains the types of pain experienced after spinal cord injury, contributing factors, daily impact, and evidence-based assessment principles",
+        metadata: {
+          injury_level: "All",
+          duration: 6,
+          priority: "Important",
+          difficulty_level: "Competent",
+        },
+        content: [
+          {
+            type: "paragraph",
+            content:
+              "Pain affects up to 80% of people after SCI and can have far-reaching consequences for physical, psychological, and social wellbeing. Understanding pain is the first step in effective management.",
+          },
+          {
+            type: "heading",
+            content: "Types of Pain After SCI",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Neuropathic pain: Burning, shooting, stabbing, or electric sensations due to nervous system damage; may occur at, above, or below the injury level",
+              "Nociceptive pain: Aching, stiff, cramping, or throbbing pain from tissue damage or inflammation (musculoskeletal or visceral)",
+              "Mixed pain: Combination of neuropathic and nociceptive mechanisms",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Factors Influencing Pain",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Injury-related factors: Level, completeness, time since injury, syringomyelia, complications",
+              "Individual factors: Age, co-morbidities, psychological state, sleep quality, coping skills",
+              "Environmental and lifestyle factors: Weather, temperature, stress, physical activity, social support",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Impact on Daily Life",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Physical: Reduced mobility, sleep disturbances, fatigue, decreased fitness",
+              "Psychological: Depression, anxiety, irritability, difficulty concentrating, reduced motivation",
+              "Social and occupational: Reduced productivity, social withdrawal, financial strain, decreased independence",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Pain Assessment",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Numeric Rating Scale (0-10) to capture intensity",
+              "Use of descriptive words (burning, stabbing, aching, cramping) to characterise pain quality",
+              "Pain diaries to track triggers, patterns, activities, and treatment effectiveness",
+            ],
+          },
+          {
+            type: "heading",
+            content: "When Pain Requires Escalation",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Pain interferes with daily activities, rehabilitation, or sleep",
+              "Increasing intensity or frequency of pain episodes",
+              "New types of pain or changes in established pain patterns",
+              "Associated mood changes, depression, or reduced participation",
+              "Lack of response to usual management strategies",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Myths and Misconceptions",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Myth: Complete SCI eliminates pain—reality: pain can occur above, at, or below the injury",
+              "Myth: Pain is purely psychological—reality: physiological mechanisms underpin pain and require treatment",
+              "Myth: Living with pain is inevitable—reality: multimodal strategies can improve outcomes",
+              "Myth: Only strong medications help—reality: treatment often blends pharmacological and non-pharmacological approaches",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Biopsychosocial Model of Pain",
+            level: 2,
+          },
+          {
+            type: "paragraph",
+            content:
+              "Effective pain management addresses biological drivers, psychological responses, and social context. Collaboration with the multidisciplinary team is essential.",
+          },
+          {
+            type: "heading",
+            content: "Hope and Outlook",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Pain is real and deserves attention",
+              "Effective treatments are available and continue to evolve",
+              "Support from healthcare teams and peers improves outcomes",
+              "Significant symptom reduction and quality-of-life gains are possible",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Australian Resources",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "NSW Health Pain Management Networks",
+              "Queensland Persistent Pain services",
+              "Spinal Cord Injuries Australia support groups",
+              "Australian Pain Society educational resources",
+            ],
+          },
+        ],
+        learning_objectives: [
+          "Differentiate between neuropathic, nociceptive, and mixed pain presentations after SCI",
+          "Identify injury-related, individual, and environmental factors that influence pain experience",
+          "Describe how pain impacts physical, psychological, and social functioning",
+          "Explain the importance of comprehensive pain assessment in developing management plans",
+        ],
+        assessment_questions: [
+          {
+            id: "5-a-q1",
+            question:
+              "Which type of pain is typically described as burning or shooting and results from nervous system damage after spinal cord injury?",
+            options: ["Musculoskeletal pain", "Neuropathic pain", "Visceral pain", "Referred pain"],
+            correct_answer: "Neuropathic pain",
+            explanation:
+              "Neuropathic pain arises from injury-related damage to the nervous system and is commonly described as burning, shooting, or electric in nature.",
+          },
+        ],
+      },
+    ],
+  },
+  {
     module_id: 2,
     title: "Bowel Management System",
     category: "Body Systems",
@@ -551,6 +856,545 @@ export const modulesData: Module[] = [
             correct_answer: "Increased chance of autonomic dysreflexia triggered by bowel stimulation",
             explanation:
               "Autonomic dysreflexia (AD) is a dangerous, sudden increase in blood pressure caused by noxious stimuli below the injury level, such as bowel care procedures in people with SCI at or above T6.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    module_id: 3,
+    title: "Respiratory Care System",
+    category: "Body Systems",
+    summary:
+      "Respiratory education covering the impact of SCI on breathing, evidence-based breathing exercises, and pneumonia prevention strategies",
+    priority: "Critical",
+    order: 3,
+    sub_modules: [
+      {
+        id: "3-a",
+        module_id: 3,
+        title: "Understanding Respiratory Changes After SCI",
+        description:
+          "Essential overview of how different injury levels alter respiratory muscle function, common complications, and the importance of proactive respiratory care",
+        metadata: {
+          injury_level: "All",
+          duration: 6,
+          priority: "Critical",
+          difficulty_level: "Competent",
+        },
+        content: [
+          {
+            type: "paragraph",
+            content:
+              "Spinal cord injury, particularly cervical and high thoracic lesions, can profoundly affect the respiratory system. Recognising these changes supports targeted interventions and complication prevention.",
+          },
+          {
+            type: "heading",
+            content: "Normal Respiratory Function",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Diaphragm: Primary inspiratory muscle innervated by the phrenic nerves (C3-C5)",
+              "Intercostal muscles: Located between the ribs and assist chest wall expansion (T1-T12)",
+              "Accessory muscles: Neck and shoulder muscles recruited during increased respiratory demand",
+              "Abdominal muscles: Support forced expiration and an effective cough (T6-L1)",
+            ],
+          },
+          {
+            type: "heading",
+            content: "How SCI Affects Respiratory Function",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Cervical injuries (C1-C2): Require mechanical ventilation due to diaphragm paralysis",
+              "C3-C4 injuries: Partial diaphragm function; ventilatory support often required",
+              "C5-C8 injuries: Diaphragm preserved but weak intercostals and abdominals reduce lung volumes and cough effectiveness",
+              "T1-T6 injuries: Diaphragm intact, but intercostal weakness reduces chest wall stability and cough strength",
+              "T7-T12 injuries: Gradual recovery of respiratory muscles; abdominal weakness still impacts cough",
+              "Lumbar/sacral injuries: Minimal direct respiratory impact but abdominal weakness may persist",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Common Respiratory Complications After SCI",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Reduced lung volumes and atelectasis",
+              "Impaired cough leading to secretion retention",
+              "Sleep-disordered breathing including obstructive sleep apnoea",
+              "Recurrent respiratory infections such as pneumonia",
+              "Respiratory muscle fatigue due to increased work of breathing",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Factors Affecting Respiratory Function",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Injury factors: Level, completeness, time since injury, associated trauma",
+              "Individual factors: Age, fitness, smoking, body weight, posture",
+              "Environmental factors: Air quality, infection exposure, access to equipment and care",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Importance of Respiratory Care",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Maintain adequate ventilation and gas exchange",
+              "Prevent respiratory complications and hospitalisations",
+              "Optimise functional independence and quality of life",
+              "Support participation in rehabilitation and daily activities",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Australian Clinical Guideline Priorities",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Regular respiratory assessment and monitoring",
+              "Structured breathing exercises and airway clearance",
+              "Vaccination programs and infection prevention",
+              "Early mobilisation and optimal positioning",
+              "Education for people with SCI, carers, and clinicians",
+            ],
+          },
+          {
+            type: "heading",
+            content: "When to Seek Medical Attention",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Increasing shortness of breath or difficulty breathing",
+              "Changes in cough effectiveness or sputum characteristics",
+              "Fever with respiratory symptoms",
+              "Chest pain or discomfort during breathing",
+              "Unusual fatigue, weakness, or signs of infection",
+            ],
+          },
+        ],
+        learning_objectives: [
+          "Describe how spinal cord injury affects respiratory muscles at different levels",
+          "Identify common respiratory complications following spinal cord injury",
+          "Recognise factors that influence respiratory function in people with SCI",
+          "Explain why proactive respiratory care is vital to long-term health",
+        ],
+        assessment_questions: [
+          {
+            id: "3-a-q1",
+            question: "Which respiratory muscles are primarily affected in a C4 complete spinal cord injury?",
+            options: [
+              "Diaphragm only",
+              "Intercostal muscles only",
+              "Both diaphragm and intercostal muscles",
+              "Accessory neck muscles only",
+            ],
+            correct_answer: "Both diaphragm and intercostal muscles",
+            explanation:
+              "A C4 complete injury compromises both diaphragm innervation and intercostal control, dramatically reducing lung volumes and cough strength.",
+          },
+          {
+            id: "3-a-q2",
+            question: "Why are individuals with high thoracic SCI (T1-T6) at increased risk of respiratory infections?",
+            options: [
+              "Complete paralysis of the diaphragm",
+              "Weak intercostal and abdominal muscles reduce cough effectiveness",
+              "Inability to breathe without mechanical ventilation",
+              "Excessive metabolic demands on the respiratory system",
+            ],
+            correct_answer: "Weak intercostal and abdominal muscles reduce cough effectiveness",
+            explanation:
+              "Although the diaphragm remains functional, intercostal and abdominal weakness limits cough strength, allowing secretions to pool and increasing infection risk.",
+          },
+          {
+            id: "3-a-q3",
+            question:
+              "According to Australian clinical guidelines, which intervention is a priority component of respiratory care after SCI?",
+            options: [
+              "Complete bed rest to conserve energy",
+              "Avoidance of physical activity",
+              "Regular breathing exercises and airway clearance techniques",
+              "Routine oxygen therapy for all people with SCI",
+            ],
+            correct_answer: "Regular breathing exercises and airway clearance techniques",
+            explanation:
+              "Guidelines emphasise active respiratory care—structured exercises and airway clearance—to maintain lung function and prevent complications.",
+          },
+        ],
+      },
+      {
+        id: "3-b",
+        module_id: 3,
+        title: "Breathing Techniques and Exercises",
+        description:
+          "Step-by-step breathing exercises and airway clearance techniques tailored for people with spinal cord injury, based on Australian best practice",
+        metadata: {
+          injury_level: "All",
+          duration: 7,
+          priority: "Critical",
+          difficulty_level: "Competent",
+        },
+        content: [
+          {
+            type: "paragraph",
+            content:
+              "Regular breathing exercises help maximise the function of remaining respiratory muscles, improve lung capacity, and reduce respiratory complications following SCI.",
+          },
+          {
+            type: "heading",
+            content: "Benefits of Breathing Exercises After SCI",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Increase lung capacity and chest wall mobility",
+              "Strengthen remaining respiratory muscles",
+              "Enhance secretion clearance and reduce infection risk",
+              "Decrease respiratory fatigue and breathlessness",
+              "Improve sleep quality and cardiovascular health",
+              "Build confidence and independence in respiratory self-management",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Core Breathing Techniques",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Diaphragmatic breathing: Controlled abdominal breathing performed 2-3 times daily for 5-10 minutes",
+              "Glossopharyngeal (frog) breathing: Sequential \"gulps\" of air using tongue and throat muscles—practised under supervision",
+              "Incentive spirometry: Slow, deep inhalations with breath holds repeated 10-15 times every hour while awake",
+              "Pursed-lip breathing: Inhale through the nose, exhale slowly through pursed lips to control airflow",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Chest Expansion and Mobility Exercises",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Chest wall stretching: Raise arms overhead while inhaling, hold briefly, lower during exhalation",
+              "Trunk rotation: Rotate through the trunk while exhaling, return to centre with inhalation (5 repetitions per side)",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Coughing Techniques and Airway Clearance",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Assisted (quad) cough: Caregiver applies an upward abdominal thrust during cough effort",
+              "Huffing technique: Deep breath followed by forceful \"huff\" to mobilise secretions, then gentle cough",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Advanced Techniques",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Breath stacking: Sequential breaths held to expand lung volume before forceful exhalation or cough",
+              "Air shifting: Direct airflow to different lung regions by altering body position",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Exercise Progression and Safety",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Begin with 5-10 minute sessions, 2-3 times daily, and increase gradually",
+              "Stop the exercise if dizziness, chest pain, or unusual breathlessness occurs",
+              "Avoid intensive practice during acute infection unless advised by clinicians",
+              "Maintain clean equipment and perform hand hygiene",
+              "Monitor oxygen saturation when equipment is available",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Positioning for Optimal Breathing",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Upright sitting (90°) supports most techniques",
+              "Semi-reclined (45-60°) is an alternative for fatigue",
+              "Side-lying positions assist with air shifting",
+              "Avoid slouched or compressed positions that restrict chest expansion",
+            ],
+          },
+          {
+            type: "heading",
+            content: "When to Seek Help",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Increasing difficulty performing exercises",
+              "New or worsening shortness of breath",
+              "Changes in secretions or cough effectiveness",
+              "Dizziness or chest pain during exercises",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Integration with Daily Activities",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Practise before meals or transfers",
+              "Incorporate techniques into routine pressure reliefs and stretching",
+              "Use exercises during stressful situations to regulate breathing",
+            ],
+          },
+        ],
+        learning_objectives: [
+          "Demonstrate key breathing techniques suitable for varying injury levels",
+          "Perform chest expansion and mobility exercises to maintain lung capacity",
+          "Apply airway clearance methods to support secretion management",
+          "Integrate breathing exercises safely into daily routines",
+        ],
+        assessment_questions: [
+          {
+            id: "3-b-q1",
+            question:
+              "Which breathing technique is most appropriate for a person with a high cervical SCI (C3-C5) who has limited diaphragm function?",
+            options: [
+              "Diaphragmatic breathing",
+              "Glossopharyngeal (frog) breathing",
+              "Pursed-lip breathing",
+              "Incentive spirometry",
+            ],
+            correct_answer: "Glossopharyngeal (frog) breathing",
+            explanation:
+              "Glossopharyngeal breathing uses mouth and throat muscles to \"gulp\" air into the lungs, supporting people with weak diaphragm function.",
+          },
+          {
+            id: "3-b-q2",
+            question: "What is the primary purpose of incentive spirometry in people with spinal cord injury?",
+            options: [
+              "Strengthen abdominal muscles",
+              "Encourage deep inhalation and prevent lung collapse",
+              "Improve cough effectiveness directly",
+              "Assist with airway suctioning",
+            ],
+            correct_answer: "Encourage deep inhalation and prevent lung collapse",
+            explanation:
+              "Incentive spirometry promotes slow, deep breaths that expand the lungs and reduce the risk of atelectasis.",
+          },
+          {
+            id: "3-b-q3",
+            question:
+              "Which sign indicates a need to stop breathing exercises and seek urgent medical assessment for respiratory complications?",
+            options: [
+              "Mild fatigue after the session",
+              "Chest pain or unusual shortness of breath during the exercises",
+              "Slight increase in mucus clearance",
+              "Feeling relaxed after practice",
+            ],
+            correct_answer: "Chest pain or unusual shortness of breath during the exercises",
+            explanation:
+              "Chest pain or unexplained breathlessness can signal serious complications requiring immediate clinical review.",
+          },
+        ],
+      },
+      {
+        id: "3-c",
+        module_id: 3,
+        title: "Pneumonia Prevention",
+        description:
+          "Practical guidance to reduce pneumonia risk in people with spinal cord injury, covering respiratory hygiene, vaccination, daily routines, and escalation steps",
+        metadata: {
+          injury_level: "All",
+          duration: 5,
+          priority: "Critical",
+          difficulty_level: "Competent",
+        },
+        content: [
+          {
+            type: "paragraph",
+            content:
+              "Pneumonia remains a leading cause of hospitalisation after SCI due to compromised respiratory mechanics and secretion clearance. Preventive strategies are essential.",
+          },
+          {
+            type: "heading",
+            content: "Why Pneumonia Prevention is Critical",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Respiratory infections can escalate quickly and become life-threatening",
+              "Pneumonia prolongs hospital stays and delays rehabilitation progress",
+              "Proactive prevention improves quality of life and reduces healthcare costs",
+              "Early care mitigates complications such as respiratory failure",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Key Strategies for Prevention",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Respiratory hygiene: Assisted cough, upright positioning, chest physiotherapy, incentive spirometry",
+              "Infection control: Vigilant hand hygiene, avoiding exposure to illness, staying up to date with influenza and pneumococcal vaccinations",
+              "Optimise overall health: Adequate nutrition, hydration, smoking cessation, and regular monitoring",
+              "Early recognition: Identify warning signs promptly and seek medical review",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Prevention Strategies by Injury Level",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Cervical injuries: Ventilatory support where needed, rigorous airway clearance, prevention of ventilator-associated pneumonia, frequent monitoring",
+              "Thoracic injuries: Emphasise cough assistance, breathing exercises, and early mobilisation",
+              "Lower injuries: Maintain vaccination schedules, general health optimisation, and infection prevention routines",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Role of Caregivers and Healthcare Providers",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Assist with respiratory therapies and airway clearance",
+              "Reinforce education on symptom recognition and self-care",
+              "Ensure vaccinations are current",
+              "Promote mobility and upright positioning",
+              "Monitor closely for complications or deterioration",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Environmental and Daily Routine Considerations",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Maintain clean air, use filters, and avoid smoke or pollution",
+              "Keep comfortable ambient temperature and humidity",
+              "Daily schedule: Morning breathing exercises and airway clearance, daytime hydration and infection prevention habits, evening respiratory care with elevated sleeping position",
+            ],
+          },
+          {
+            type: "heading",
+            content: "When to Seek Medical Attention",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "Fever above 37.5°C (99.5°F)",
+              "Increased or discoloured sputum with a worsening cough",
+              "Shortness of breath or breathing difficulty",
+              "Chest pain, unusual fatigue, weakness, or changes in mental state",
+              "Emergency indicators: Severe breathlessness, cyanosis, chest pain with distress, persistent high fever, or loss of consciousness (call 000 in Australia)",
+            ],
+          },
+          {
+            type: "heading",
+            content: "Australian Resources and Support",
+            level: 2,
+          },
+          {
+            type: "list",
+            content: [
+              "NSW Health Agency for Clinical Innovation respiratory guidelines",
+              "Queensland Spinal Cord Injuries Service education materials",
+              "Spinal Cord Injuries Australia community supports",
+              "Australian Immunisation Handbook recommendations",
+            ],
+          },
+        ],
+        learning_objectives: [
+          "Explain why people with spinal cord injury face increased pneumonia risk",
+          "Identify respiratory hygiene and vaccination strategies that reduce infection",
+          "Recognise early warning signs of pneumonia and appropriate escalation steps",
+          "Outline the roles of healthcare teams and caregivers in pneumonia prevention",
+        ],
+        assessment_questions: [
+          {
+            id: "3-c-q1",
+            question:
+              "Which intervention most effectively helps clear lung secretions in a person with a high-level spinal cord injury?",
+            options: [
+              "Increasing fluid intake only",
+              "Manual assisted cough or mechanical cough assist devices",
+              "Remaining lying flat to rest",
+              "Avoiding physical activity to conserve energy",
+            ],
+            correct_answer: "Manual assisted cough or mechanical cough assist devices",
+            explanation:
+              "Assisted cough techniques or mechanical devices compensate for weak respiratory muscles, mobilising mucus and reducing pneumonia risk.",
+          },
+          {
+            id: "3-c-q2",
+            question: "Which vaccinations are recommended in Australia to reduce pneumonia risk after SCI?",
+            options: [
+              "Influenza vaccine only",
+              "Pneumococcal vaccine only",
+              "Both influenza and pneumococcal vaccines",
+              "No vaccinations are recommended",
+            ],
+            correct_answer: "Both influenza and pneumococcal vaccines",
+            explanation:
+              "Australian guidelines advise annual influenza vaccination and scheduled pneumococcal vaccination to reduce respiratory infections.",
+          },
+          {
+            id: "3-c-q3",
+            question:
+              "Which sign suggests a person with SCI may be developing pneumonia and needs prompt medical review?",
+            options: [
+              "Mild fatigue without respiratory symptoms",
+              "Increased coughing with coloured sputum and fever",
+              "Stable breathing with no cough",
+              "Occasional muscle spasms",
+            ],
+            correct_answer: "Increased coughing with coloured sputum and fever",
+            explanation:
+              "Changes in sputum colour combined with fever indicate possible infection and warrant urgent clinical assessment.",
           },
         ],
       },
