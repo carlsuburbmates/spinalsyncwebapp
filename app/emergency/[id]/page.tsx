@@ -8,8 +8,13 @@ import { AlertCircle, Phone, ArrowLeft, AlertTriangle } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-export default function EmergencyProtocolPage({ params }: { params: { id: string } }) {
-  const protocol = getProtocolById(params.id)
+type EmergencyProtocolPageProps = {
+  params: Promise<{ id: string }>
+}
+
+export default async function EmergencyProtocolPage({ params }: EmergencyProtocolPageProps) {
+  const { id } = await params
+  const protocol = getProtocolById(id)
 
   if (!protocol) {
     notFound()

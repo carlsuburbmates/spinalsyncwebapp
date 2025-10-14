@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { getSubModuleById } from "@/lib/modules-data"
 import { QuizQuestion } from "@/components/quiz-question"
 import { QuizResults } from "@/components/quiz-results"
@@ -8,8 +8,13 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-export default function AssessmentPage({ params }: { params: { id: string } }) {
-  const subModule = getSubModuleById(params.id)
+type AssessmentPageProps = {
+  params: Promise<{ id: string }>
+}
+
+export default function AssessmentPage({ params }: AssessmentPageProps) {
+  const { id } = use(params)
+  const subModule = getSubModuleById(id)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [showResults, setShowResults] = useState(false)
@@ -64,10 +69,7 @@ export default function AssessmentPage({ params }: { params: { id: string } }) {
     <div className="min-h-screen bg-background">
       <div className="container max-w-3xl mx-auto px-4 py-8">
         {!showResults && (
-          <Link
-            href={`/lesson/${params.id}`}
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
-          >
+          <Link href={`/lesson/${id}`} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Lesson
           </Link>

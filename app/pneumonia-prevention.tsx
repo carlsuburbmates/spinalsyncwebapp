@@ -57,8 +57,7 @@ export default function PneumoniaPrevention() {
         </ul>
         <h3>When to Seek Medical Attention</h3>
         <ul>
-          <li>Fever (>37.5°C/99.5°F)</li>
-            <li>Fever ({'>'}37.5°C/99.5°F)</li>
+          <li>Fever ({'>'}37.5°C/99.5°F)</li>
           <li>New/increased cough with colored sputum</li>
           <li>Shortness of breath or difficulty breathing</li>
           <li>Chest pain or tightness</li>

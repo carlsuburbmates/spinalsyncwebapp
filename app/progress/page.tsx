@@ -15,7 +15,7 @@ import Link from "next/link"
 export default function ProgressPage() {
   const [userProgress] = useState({
     completed_modules: ["1-b", "1-c"],
-    assessment_scores: { "1-b": 100, "1-c": 85 },
+    assessment_scores: { "1-b": 100, "1-c": 85 } as Record<string, number>,
     badges_earned: ["bladder-basics-master", "first-responder"],
     current_level: 2,
     streak_days: 5,

@@ -1,12 +1,15 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { modules, progress } from "@/lib/data"
+import { modulesData } from "@/lib/modules-data"
+import { progress } from "@/lib/data"
 import { ArrowRight, AlertTriangle } from "lucide-react"
 
 export default function DashboardPage() {
-  const totalModules = modules.length
+  const orderedModules = [...modulesData].sort((a, b) => a.order - b.order)
+  const totalModules = orderedModules.length
   const completedModules = progress.completed
   const pendingQuizzes = progress.pending_quizzes
+  const recentModules = orderedModules.slice(0, 3)
 
   return (
     <div className="space-y-6">
@@ -75,7 +78,7 @@ export default function DashboardPage() {
           </Link>
         </div>
         <div className="grid gap-3">
-          {modules.slice(0, 3).map((module) => (
+          {recentModules.map((module) => (
             <Link key={module.module_id} href={`/modules/${module.module_id}`}>
               <Card className="transition-colors hover:bg-accent cursor-pointer">
                 <CardHeader className="pb-3">

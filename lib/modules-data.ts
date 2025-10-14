@@ -1017,8 +1017,8 @@ export function getSubModuleById(id: string): SubModule | undefined {
 }
 
 export function getSubModulesByModuleId(moduleId: number): SubModule[] {
-  const module = getModuleById(moduleId)
-  return module?.sub_modules || []
+  const targetModule = getModuleById(moduleId)
+  return targetModule?.sub_modules || []
 }
 
 export function getModulesByPriority(priority: "Critical" | "Important"): Module[] {

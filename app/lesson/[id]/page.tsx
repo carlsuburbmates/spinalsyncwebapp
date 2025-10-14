@@ -6,8 +6,13 @@ import { ArrowLeft, BookOpen } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-export default function LessonPage({ params }: { params: { id: string } }) {
-  const subModule = getSubModuleById(params.id)
+type LessonPageProps = {
+  params: Promise<{ id: string }>
+}
+
+export default async function LessonPage({ params }: LessonPageProps) {
+  const { id } = await params
+  const subModule = getSubModuleById(id)
 
   if (!subModule) {
     notFound()

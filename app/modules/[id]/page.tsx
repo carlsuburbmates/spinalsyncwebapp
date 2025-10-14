@@ -7,24 +7,29 @@ import { Button } from "@/components/ui/button"
 import { getModuleById } from "@/lib/modules-data"
 import { BookOpen, Clock, Target, AlertCircle, ArrowRight } from "lucide-react"
 
-export default function ModuleDetailPage({ params }: { params: { id: string } }) {
-  const moduleId = Number.parseInt(params.id)
-  const module = getModuleById(moduleId)
+type ModulePageProps = {
+  params: Promise<{ id: string }>
+}
 
-  if (!module) {
+export default async function ModuleDetailPage({ params }: ModulePageProps) {
+  const { id } = await params
+  const moduleId = Number.parseInt(id, 10)
+  const currentModule = getModuleById(moduleId)
+
+  if (!currentModule) {
     notFound()
   }
 
-  const totalDuration = module.sub_modules.reduce((sum, sm) => sum + sm.metadata.duration, 0)
+  const totalDuration = currentModule.sub_modules.reduce((sum, sm) => sum + sm.metadata.duration, 0)
 
   return (
     <div className="space-y-6">
       {/* Module Header */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="outline">{module.category}</Badge>
-          <span className="text-sm text-muted-foreground">Module {module.order}</span>
-          {module.priority === "Critical" && (
+          <Badge variant="outline">{currentModule.category}</Badge>
+          <span className="text-sm text-muted-foreground">Module {currentModule.order}</span>
+          {currentModule.priority === "Critical" && (
             <Badge variant="destructive">
               <AlertCircle className="w-3 h-3 mr-1" />
               Critical
@@ -35,8 +40,8 @@ export default function ModuleDetailPage({ params }: { params: { id: string } })
             {totalDuration} min total
           </Badge>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight">{module.title}</h1>
-        <p className="text-lg text-muted-foreground">{module.summary}</p>
+        <h1 className="text-3xl font-bold tracking-tight">{currentModule.title}</h1>
+        <p className="text-lg text-muted-foreground">{currentModule.summary}</p>
       </div>
 
       <Separator />
@@ -47,7 +52,7 @@ export default function ModuleDetailPage({ params }: { params: { id: string } })
           <h2 className="text-xl font-semibold">Micro-Lessons</h2>
         </div>
         <div className="grid gap-3">
-          {module.sub_modules.map((subModule, index) => {
+          {currentModule.sub_modules.map((subModule, index) => {
             const priorityColors = {
               Critical: "border-red-200 dark:border-red-900",
               Important: "border-orange-200 dark:border-orange-900",
@@ -107,7 +112,7 @@ export default function ModuleDetailPage({ params }: { params: { id: string } })
               <h3 className="font-semibold mb-1">Ready to start learning?</h3>
               <p className="text-sm text-muted-foreground">Begin with the first micro-lesson</p>
             </div>
-            <Link href={`/lesson/${module.sub_modules[0]?.id}`}>
+            <Link href={`/lesson/${currentModule.sub_modules[0]?.id}`}>
               <Button>Start Module</Button>
             </Link>
           </div>

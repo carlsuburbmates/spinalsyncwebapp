@@ -4,7 +4,6 @@ import { resources } from "@/lib/data"
 import { FileText, ExternalLink, AlertTriangle } from "lucide-react"
 
 export default function ResourcesPage() {
-  // Separate emergency protocols from general resources
   const emergencyResources = resources.filter(
     (r) => r.type.toLowerCase().includes("emergency") || r.type.toLowerCase().includes("protocol"),
   )
@@ -25,17 +24,37 @@ export default function ResourcesPage() {
           <AlertTriangle className="h-5 w-5 text-destructive" />
           <h3 className="text-lg font-medium">Emergency Protocols</h3>
         </div>
-        <Card className="border-destructive/50">
-          <CardHeader>
-            <CardTitle className="text-base">Autonomic Dysreflexia Protocol</CardTitle>
-            <CardDescription>Critical emergency response procedure for AD episodes</CardDescription>
-            <div className="pt-2">
-              <Badge variant="destructive" className="text-xs">
-                Emergency
-              </Badge>
-            </div>
-          </CardHeader>
-        </Card>
+        <div className="grid gap-3">
+          {emergencyResources.length > 0 ? (
+            emergencyResources.map((resource, index) => (
+              <a key={index} href={resource.url} target="_blank" rel="noopener noreferrer">
+                <Card className="transition-colors hover:bg-accent cursor-pointer border-destructive/50">
+                  <CardHeader>
+                    <CardTitle className="text-base">{resource.title}</CardTitle>
+                    <CardDescription>Critical emergency response procedure</CardDescription>
+                    <div className="pt-2">
+                      <Badge variant="destructive" className="text-xs">
+                        Emergency
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                </Card>
+              </a>
+            ))
+          ) : (
+            <Card className="border-destructive/50">
+              <CardHeader>
+                <CardTitle className="text-base">Autonomic Dysreflexia Protocol</CardTitle>
+                <CardDescription>Critical emergency response procedure for AD episodes</CardDescription>
+                <div className="pt-2">
+                  <Badge variant="destructive" className="text-xs">
+                    Emergency
+                  </Badge>
+                </div>
+              </CardHeader>
+            </Card>
+          )}
+        </div>
       </div>
 
       {/* General Resources Section */}

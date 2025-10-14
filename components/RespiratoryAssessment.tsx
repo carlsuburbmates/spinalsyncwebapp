@@ -10,7 +10,7 @@ interface AssessmentQuestion {
 
 export const RespiratoryAssessment: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: string]: any }>({});
+  const [answers, setAnswers] = useState<Record<string, unknown>>({});
   const [showResults, setShowResults] = useState(false);
 
   // ...existing code...

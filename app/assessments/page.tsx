@@ -3,19 +3,23 @@
 import Link from "next/link"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { assessments, modules } from "@/lib/data"
+import { modulesData } from "@/lib/modules-data"
 import { FileText, ArrowRight } from "lucide-react"
 
 export default function AssessmentsPage() {
-  // Group assessments by module
-  const assessmentsByModule = assessments.map((assessment) => {
-    const module = modules.find((m) => m.module_id === assessment.module_id)
-    return {
-      ...assessment,
-      moduleName: module?.title || "Unknown Module",
-      moduleCategory: module?.category || "Unknown",
-    }
-  })
+  const assessmentEntries = modulesData.flatMap((module) =>
+    module.sub_modules
+      .filter((subModule) => subModule.assessment_questions.length > 0)
+      .map((subModule) => ({
+        moduleId: module.module_id,
+        moduleTitle: module.title,
+        moduleCategory: module.category,
+        subModuleId: subModule.id,
+        subModuleTitle: subModule.title,
+        difficulty: subModule.metadata.difficulty_level,
+        questionCount: subModule.assessment_questions.length,
+      })),
+  )
 
   return (
     <div className="space-y-6">
@@ -29,7 +33,7 @@ export default function AssessmentsPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardDescription>Total Assessments</CardDescription>
-            <CardTitle className="text-3xl">{assessments.length}</CardTitle>
+            <CardTitle className="text-3xl">{assessmentEntries.length}</CardTitle>
           </CardHeader>
         </Card>
 
@@ -43,7 +47,7 @@ export default function AssessmentsPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardDescription>Pending</CardDescription>
-            <CardTitle className="text-3xl">{assessments.length}</CardTitle>
+            <CardTitle className="text-3xl">{assessmentEntries.length}</CardTitle>
           </CardHeader>
         </Card>
       </div>
@@ -51,10 +55,10 @@ export default function AssessmentsPage() {
       {/* Assessments List */}
       <div className="space-y-3">
         <h3 className="text-lg font-medium">Available Assessments</h3>
-        {assessmentsByModule.length > 0 ? (
+        {assessmentEntries.length > 0 ? (
           <div className="grid gap-3">
-            {assessmentsByModule.map((assessment, index) => (
-              <Card key={index} className="transition-colors hover:bg-accent cursor-pointer">
+            {assessmentEntries.map((assessment) => (
+              <Card key={assessment.subModuleId} className="transition-colors hover:bg-accent cursor-pointer">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-2 flex-1">
@@ -63,26 +67,26 @@ export default function AssessmentsPage() {
                           {assessment.moduleCategory}
                         </Badge>
                         <Badge variant="secondary" className="text-xs">
-                          {assessment.type}
+                          Quiz
                         </Badge>
-                        <Badge
-                          variant={assessment.difficulty === "Basic" ? "default" : "destructive"}
-                          className="text-xs"
-                        >
+                        <Badge variant="default" className="text-xs">
                           {assessment.difficulty}
                         </Badge>
                       </div>
-                      <CardTitle className="text-lg">{assessment.title}</CardTitle>
+                      <CardTitle className="text-lg">{assessment.subModuleTitle}</CardTitle>
                       <CardDescription className="flex items-center gap-1">
                         <FileText className="h-3 w-3" />
                         <Link
-                          href={`/modules/${assessment.module_id}`}
+                          href={`/modules/${assessment.moduleId}`}
                           className="hover:underline"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {assessment.moduleName}
+                          {assessment.moduleTitle}
                         </Link>
                       </CardDescription>
+                      <p className="text-xs text-muted-foreground">
+                        {assessment.questionCount} question{assessment.questionCount === 1 ? "" : "s"}
+                      </p>
                     </div>
                     <ArrowRight className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-1" />
                   </div>
