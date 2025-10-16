@@ -74,17 +74,8 @@ When adding new educational content:
 - `BadgeCard`, `ProgressStats`: Progress summarisation.
 - `EmergencyProtocolCard`: Card view for emergency protocols.
 
-### Template/Placeholder Components
-The following remain scaffolds with unused state and placeholder comments. They are not imported anywhere, but ESLint warns about unused variables:
-
-- `components/BreathingExerciseTracker.tsx`
-- `components/CaseStudyViewer.tsx`
-- `components/PainTracker.tsx`
-- `components/PressureReliefReminder.tsx`
-- `components/RespiratoryAssessment.tsx`
-- `components/SkinInspectionChecklist.tsx`
-
-Action: either complete these widgets or remove their exports from `components/index.ts` to silence warnings.
+### Interactive Components
+- `components/BreathingExerciseTracker.tsx`, `CaseStudyViewer.tsx`, `PainTracker.tsx`, `PressureReliefReminder.tsx`, `RespiratoryAssessment.tsx`, and `SkinInspectionChecklist.tsx` now provide complete UI/logic (timers, logging, scoring). They no longer raise lint warnings.
 
 ---
 
@@ -93,17 +84,12 @@ Action: either complete these widgets or remove their exports from `components/i
 Latest command runs (2025-10-14):
 
 ```bash
-npm run lint   # passes with warnings from placeholder components
-npm run build  # succeeds; same warnings surfaced during type check
+npm run lint   # clean
+npm run test   # vitest quiz flow coverage
+npm run build  # succeeds with lint + type checks
 ```
 
-Primary warning sources:
-
-- `app/assessment/[id]/page.tsx`: `useEffect` dependency on `handleNext`.
-- Unused state in the template components listed above.
-- `components/ui/use-toast.ts`: `actionTypes` only used for typing.
-
-Treat these as follow-up tasks to reach a clean lint/build.
+In CI, run the trio above to catch regressions.
 
 ---
 
@@ -129,13 +115,51 @@ To keep project knowledge consistent:
 5. **Change Log**
    - Append to the “Revision History” section (below) whenever this protocol changes.
 
+### Supabase Integration
+
+- Environment keys: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (see `.env.local`).
+- Table definition for `progress`:
+  ```sql
+  create table if not exists progress (
+    user_id uuid not null,
+    sub_module_id text not null,
+    score integer,
+    completed_at timestamptz default now(),
+    inserted_at timestamptz default now(),
+    updated_at timestamptz default now(),
+    primary key (user_id, sub_module_id)
+  );
+
+  create index if not exists progress_user_idx on progress (user_id);
+
+  alter table progress enable row level security;
+  create policy "Users can read their own progress"
+    on progress for select using (auth.uid() = user_id);
+  create policy "Users can upsert their own progress"
+    on progress for insert with check (auth.uid() = user_id);
+  create policy "Users can update their own progress"
+    on progress for update using (auth.uid() = user_id);
+  ```
+- Server helper: `lib/supabase/server.ts` (service-role client). Browser helper: `lib/supabase/client.ts`.
+- API bridge: `app/api/progress/route.ts` handles GET/POST for client components.
+- UI:
+  - `app/assessment/[id]/page.tsx` upserts progress after quizzes.
+  - `app/progress/page.tsx` reads Supabase progress and merges it with curriculum metadata.
+- Replace the “sign-in to track progress” placeholder once the authentication flow is connected.
+
+### Testing
+
+- Vitest config: `vitest.config.ts`, `vitest.setup.ts`. React is injected via `jsxInject`.
+- Test suites live in `__tests__/`. Current coverage ensures quiz-answer handling works as expected (`quiz-question.test.tsx`).
+- Use `npm run test` locally and in CI.
+
 ---
 
 ## 7. Recommended Future Enhancements
 
 - Finish or remove template components to resolve lint warnings.
-- Wire learner progress to persistent storage (Supabase, Firebase, etc.) instead of hardcoded mock data.
-- Introduce automated tests (e.g., vitest + React Testing Library) for quiz logic and routing.
+- Expand Supabase progress tracking (add badge/streak logic driven from DB).
+- Introduce broader automated tests (e.g., progress API, emergency logging) as features grow.
 - Expand `resources` dataset or integrate with CMS for easier content management.
 - Flesh out README with a project overview and link to this handbook.
 
@@ -146,8 +170,8 @@ To keep project knowledge consistent:
 | Date (ISO) | Author | Notes |
 | --- | --- | --- |
 | 2025-10-14 | Codex Agent | Initial comprehensive handbook and documentation protocol |
+| 2025-10-15 | Codex Agent | Supabase integration, interactive component completion, lint/test/build workflow updates |
 
 ---
 
 _Keep this document up to date. It is the single source of truth for understanding and maintaining SpinalSync._
-

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -11,15 +11,74 @@ import { ProgressStats } from "@/components/progress-stats"
 import { BadgeCard } from "@/components/badge-card"
 import { CheckCircle2, Circle, Clock, Trophy } from "lucide-react"
 import Link from "next/link"
+import { createSupabaseBrowserClient } from "@/lib/supabase/client"
+
+type ProgressRecord = {
+  sub_module_id: string
+  score: number | null
+  completed_at: string | null
+}
 
 export default function ProgressPage() {
-  const [userProgress] = useState({
-    completed_modules: ["1-b", "1-c"],
-    assessment_scores: { "1-b": 100, "1-c": 85 } as Record<string, number>,
-    badges_earned: ["bladder-basics-master", "first-responder"],
-    current_level: 2,
-    streak_days: 5,
+  const supabase = useMemo(() => createSupabaseBrowserClient(), [])
+  const [userId, setUserId] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [userProgress, setUserProgress] = useState({
+    completed_modules: [] as string[],
+    assessment_scores: {} as Record<string, number>,
+    badges_earned: [] as string[],
+    current_level: 1,
+    streak_days: 0,
   })
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadProgress() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!isMounted) return
+
+      if (!user) {
+        setLoading(false)
+        return
+      }
+
+      setUserId(user.id)
+
+      const response = await fetch(`/api/progress?userId=${user.id}`)
+      if (!response.ok) {
+        setLoading(false)
+        return
+      }
+
+      const { progress } = (await response.json()) as { progress: ProgressRecord[] }
+
+      const completedModules = progress.map((record) => record.sub_module_id)
+      const scores = progress.reduce<Record<string, number>>((acc, record) => {
+        if (record.score != null) acc[record.sub_module_id] = record.score
+        return acc
+      }, {})
+
+      setUserProgress((prev) => ({
+        ...prev,
+        completed_modules: completedModules,
+        assessment_scores: scores,
+        // Placeholder for badges and streak logic – to be implemented with real criteria
+        badges_earned: prev.badges_earned,
+      }))
+
+      setLoading(false)
+    }
+
+    loadProgress()
+
+    return () => {
+      isMounted = false
+    }
+  }, [supabase])
 
   const allSubModules = getAllSubModules()
   const totalModules = allSubModules.length
@@ -28,6 +87,26 @@ export default function ProgressPage() {
 
   const earnedBadges = badges.filter((b) => userProgress.badges_earned.includes(b.id))
   const lockedBadges = badges.filter((b) => !userProgress.badges_earned.includes(b.id))
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <h2 className="text-2xl font-semibold tracking-tight">Learning Progress</h2>
+        <p className="text-muted-foreground">Loading your progress…</p>
+      </div>
+    )
+  }
+
+  if (!userId) {
+    return (
+      <div className="space-y-6">
+        <h2 className="text-2xl font-semibold tracking-tight">Learning Progress</h2>
+        <p className="text-muted-foreground">
+          Sign in to track your completed lessons and assessment scores.
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
