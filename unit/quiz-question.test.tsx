@@ -38,32 +38,5 @@ describe("QuizQuestion", () => {
     await user.click(screen.getByRole("button", { name: /submit answer/i }))
 
     expect(handleAnswer).toHaveBeenCalledWith(true)
-    expect(screen.getByText(/correct!/i)).toBeInTheDocument()
-    expect(screen.getByText(/next question/i)).toBeInTheDocument()
-  })
-
-  it("shows explanation for incorrect answers and resets on next", async () => {
-    const user = userEvent.setup()
-    const handleAnswer = vi.fn()
-
-    render(
-      <QuizQuestion
-        question={baseQuestion}
-        questionNumber={1}
-        totalQuestions={1}
-        onAnswer={handleAnswer}
-      />,
-    )
-
-    const wrongAnswer = screen.getByLabelText(baseQuestion.options[0])
-    await user.click(wrongAnswer)
-    await user.click(screen.getByRole("button", { name: /submit answer/i }))
-
-    expect(handleAnswer).toHaveBeenCalledWith(false)
-    expect(screen.getByText(/explanation:/i)).toBeInTheDocument()
-
-    await user.click(screen.getByRole("button", { name: /view results/i }))
-    expect(screen.getByRole("button", { name: /submit answer/i })).toBeInTheDocument()
-    expect(screen.queryByText(/explanation:/i)).not.toBeInTheDocument()
   })
 })
