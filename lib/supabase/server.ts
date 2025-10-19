@@ -1,6 +1,7 @@
-import { createClient } from "@supabase/supabase-js"
 
-export function createSupabaseServerClient() {
+import { createClient as createSupabaseJsClient } from "@supabase/supabase-js"
+
+function createSupabaseServerClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
@@ -8,5 +9,7 @@ export function createSupabaseServerClient() {
     throw new Error("Supabase server credentials are not configured")
   }
 
-  return createClient(supabaseUrl, serviceRoleKey)
+  return createSupabaseJsClient(supabaseUrl, serviceRoleKey)
 }
+
+export { createSupabaseServerClient, createSupabaseServerClient as createClient };

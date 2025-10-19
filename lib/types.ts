@@ -52,6 +52,26 @@ export interface Badge {
   icon: string
 }
 
+// Supabase table: profiles
+export interface Profile {
+  user_id: string // PK, maps to Supabase auth user id
+  // Add more fields if present in your DB (e.g., display_name, email, etc.)
+}
+
+// Supabase table: events
+export interface Event {
+  event_id: number // PK
+  user_id?: string // FK to profiles.user_id, nullable
+  // Add more fields if present (e.g., type, timestamp, details)
+}
+
+// Supabase table: user_badges
+export interface UserBadge {
+  user_id: string // PK, FK to profiles.user_id
+  badge_id: string // PK, FK to badges.badge_id
+  // Add more fields if present (e.g., awarded_at)
+}
+
 export interface UserProgress {
   user_id: string
   completed_modules: string[] // sub-module IDs
