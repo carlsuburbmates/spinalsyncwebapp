@@ -1,37 +1,8 @@
 
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { modulesData } from "@/lib/modules-data"
-import { progress } from "@/lib/data"
-import { ArrowRight, AlertTriangle, BookOpen, Stethoscope, Users, FileText, Home } from "lucide-react"
+import { AlertTriangle, BookOpen, Stethoscope, Users, FileText, Home } from "lucide-react"
 import { InteractiveSidebar } from "@/components/InteractiveSidebar"
-
-// Placeholder for QuickAccessCard, to be replaced with real component
-type QuickAccessCardProps = {
-  href: string;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  className?: string;
-};
-
-function QuickAccessCard({ href, icon, title, description, className = "" }: QuickAccessCardProps) {
-  return (
-    <Link href={href} className={"block " + className}>
-      <Card className="transition-colors hover:bg-accent cursor-pointer h-full">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-base font-medium flex items-center gap-2">
-            {icon}
-            {title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <CardDescription>{description}</CardDescription>
-        </CardContent>
-      </Card>
-    </Link>
-  )
-}
+import { QuickAccessCard } from "@/components/QuickAccessCard"
 
 
 export default function Homepage() {

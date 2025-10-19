@@ -5,16 +5,8 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { AppNav } from "@/components/app-nav"
-import { Suspense, useEffect } from "react"
-
-function ServiceWorkerRegister() {
-  useEffect(() => {
-    if (typeof window !== "undefined" && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    }
-  }, []);
-  return null;
-}
+import { Suspense } from "react"
+import { ServiceWorkerRegister } from "@/components/service-worker-register"
 
 export const metadata: Metadata = {
   title: "SpinalSync Education Framework",
@@ -28,11 +20,6 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    }
-  }, []);
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>

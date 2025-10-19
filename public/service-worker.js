@@ -1,20 +1,20 @@
 // Service Worker for offline-first caching of emergency protocols and critical guidelines
-const CACHE_NAME = 'spinalsync-critical-v1';
-const CRITICAL_URLS = [
+const CACHE_NAME = 'spinalsync-critical-v2';
+const STATIC_URLS = [
   '/emergency',
   '/emergency/autonomic-dysreflexia',
-  '/emergency/[id]',
   '/guidelines/bladder',
   '/guidelines/bowel',
   '/guidelines/skin',
   '/guidelines/pain',
-  // Add more critical guideline URLs as needed
+  // Add more static critical URLs as needed
 ];
+const CRITICAL_PREFIXES = ['/emergency/', '/guidelines/'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(CRITICAL_URLS);
+      return cache.addAll(STATIC_URLS);
     })
   );
   self.skipWaiting();
@@ -32,16 +32,32 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (CRITICAL_URLS.some((url) => event.request.url.includes(url))) {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request).then((fetchRes) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, fetchRes.clone());
-            return fetchRes;
+  if (event.request.method !== 'GET') return;
+
+  const requestUrl = new URL(event.request.url);
+  const matchesStatic = STATIC_URLS.includes(requestUrl.pathname);
+  const matchesPrefix = CRITICAL_PREFIXES.some((prefix) =>
+    requestUrl.pathname.startsWith(prefix)
+  );
+
+  if (!matchesStatic && !matchesPrefix) return;
+
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request)
+        .then((networkResponse) => {
+          if (!networkResponse || networkResponse.status !== 200) {
+            return networkResponse;
+          }
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
           });
-        });
-      })
-    );
-  }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+    })
+  );
 });

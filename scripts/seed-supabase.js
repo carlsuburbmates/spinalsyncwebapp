@@ -1,8 +1,6 @@
 // Script to seed Supabase tables with test data via API endpoints
 // Run with: `node scripts/seed-supabase.js` (after adding to package.json scripts)
 
-const fetch = require('node-fetch')
-
 const badges = [
   {
     id: 'bladder-basics-master',
@@ -45,6 +43,10 @@ async function seedBadges() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(badge),
     })
+    if (!res.ok) {
+      const message = await res.text()
+      throw new Error(`Failed to seed badge "${badge.id}": ${res.status} ${message}`)
+    }
     const data = await res.json()
     console.log('Seeded badge:', badge.id, data)
   }
