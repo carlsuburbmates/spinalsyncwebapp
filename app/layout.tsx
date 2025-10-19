@@ -5,7 +5,16 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { AppNav } from "@/components/app-nav"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
+
+function ServiceWorkerRegister() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+  }, []);
+  return null;
+}
 
 export const metadata: Metadata = {
   title: "SpinalSync Education Framework",
@@ -18,9 +27,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+  }, []);
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <ServiceWorkerRegister />
         <Suspense fallback={<div>Loading...</div>}>
           <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-14 items-center px-4">

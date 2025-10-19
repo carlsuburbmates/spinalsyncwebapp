@@ -1,100 +1,193 @@
+
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { modulesData } from "@/lib/modules-data"
 import { progress } from "@/lib/data"
-import { ArrowRight, AlertTriangle } from "lucide-react"
+import { ArrowRight, AlertTriangle, BookOpen, Stethoscope, Users, FileText, Home } from "lucide-react"
+import { InteractiveSidebar } from "@/components/InteractiveSidebar"
 
-export default function DashboardPage() {
-  const orderedModules = [...modulesData].sort((a, b) => a.order - b.order)
-  const totalModules = orderedModules.length
-  const completedModules = progress.completed
-  const pendingQuizzes = progress.pending_quizzes
-  const recentModules = orderedModules.slice(0, 3)
+// Placeholder for QuickAccessCard, to be replaced with real component
+type QuickAccessCardProps = {
+  href: string;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  className?: string;
+};
+
+function QuickAccessCard({ href, icon, title, description, className = "" }: QuickAccessCardProps) {
+  return (
+    <Link href={href} className={"block " + className}>
+      <Card className="transition-colors hover:bg-accent cursor-pointer h-full">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-base font-medium flex items-center gap-2">
+            {icon}
+            {title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription>{description}</CardDescription>
+        </CardContent>
+      </Card>
+    </Link>
+  )
+}
+
+
+export default function Homepage() {
+  // Example quick-access cards for clinical guidelines
+  const quickAccess = [
+    {
+      href: "/guidelines/bladder",
+      icon: <Stethoscope className="h-5 w-5 text-primary" />,
+      title: "Bladder Management",
+      description: "Direct bedside reference for bladder care"
+    },
+    {
+      href: "/guidelines/bowel",
+      icon: <BookOpen className="h-5 w-5 text-primary" />,
+      title: "Bowel Management",
+      description: "Protocols and checklists for bowel care"
+    },
+    {
+      href: "/guidelines/skin",
+      icon: <FileText className="h-5 w-5 text-primary" />,
+      title: "Skin Care",
+      description: "Pressure injury prevention and response"
+    },
+    {
+      href: "/guidelines/pain",
+      icon: <Stethoscope className="h-5 w-5 text-primary" />,
+      title: "Pain Management",
+      description: "Assessment and management protocols"
+    },
+    {
+      href: "/emergency",
+      icon: <AlertTriangle className="h-5 w-5 text-destructive" />,
+      title: "Emergency Protocols",
+      description: "Quick access to critical procedures"
+    },
+    {
+      href: "/team-planning",
+      icon: <Users className="h-5 w-5 text-primary" />,
+      title: "Team Planning",
+      description: "MDT meetings, goal setting, contacts"
+    },
+    {
+      href: "/discharge",
+      icon: <FileText className="h-5 w-5 text-primary" />,
+      title: "Discharge Planning",
+      description: "Forms, compensation, referrals"
+    },
+    {
+      href: "/resources",
+      icon: <BookOpen className="h-5 w-5 text-primary" />,
+      title: "Resource Library",
+      description: "Contacts, forms, links, downloads"
+    },
+  ]
+
+  // Example education/training quick links
+  const educationLinks = [
+    {
+      href: "/modules",
+      icon: <BookOpen className="h-5 w-5 text-primary" />,
+      title: "Modules",
+      description: "Browse all learning modules"
+    },
+    {
+      href: "/progress",
+      icon: <Home className="h-5 w-5 text-primary" />,
+      title: "Progress",
+      description: "Track your learning progress"
+    },
+    {
+      href: "/assessment",
+      icon: <Stethoscope className="h-5 w-5 text-primary" />,
+      title: "Assessments",
+      description: "Complete clinical assessments"
+    },
+  ]
+
+  // Sidebar navigation items
+  const sidebarItems = [
+    { href: "/", label: "Home", icon: <Home className="h-5 w-5" /> },
+    { href: "/guidelines/bladder", label: "Guidelines", icon: <BookOpen className="h-5 w-5" /> },
+    { href: "/emergency", label: "Emergency", icon: <AlertTriangle className="h-5 w-5 text-destructive" /> },
+    { href: "/resources", label: "Resources", icon: <FileText className="h-5 w-5" /> },
+    { href: "/modules", label: "Education", icon: <BookOpen className="h-5 w-5" /> },
+  ];
+
+  // Mobile bottom tab items (same as sidebar)
+  const mobileTabs = sidebarItems;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>
-        <p className="text-muted-foreground">Welcome back to your learning journey</p>
-      </div>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Sidebar for desktop/tablet */}
+      <aside className="hidden md:block md:w-64 bg-muted/30 border-r p-4 min-h-screen sticky top-0">
+        <div className="font-bold text-xl text-primary mb-8">SpinalSync</div>
+        <InteractiveSidebar items={sidebarItems} />
+      </aside>
 
-      {/* Quick Actions */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Link href="/modules">
-          <Card className="transition-colors hover:bg-accent cursor-pointer">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-base font-medium">Resume Learning</CardTitle>
-              <ArrowRight className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <CardDescription>Continue with your next module</CardDescription>
-            </CardContent>
-          </Card>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Header for mobile */}
+        <header className="md:hidden flex items-center justify-between px-4 py-3 border-b bg-background sticky top-0 z-30">
+          <span className="font-bold text-lg text-primary">SpinalSync</span>
+        </header>
+
+        <main className="flex-1 container mx-auto px-4 py-8">
+          {/* Hero/Orientation */}
+          <section className="mb-8">
+            <h1 className="text-3xl font-bold mb-2">Welcome to the Primary Nursing Digital Hub</h1>
+            <p className="text-muted-foreground max-w-2xl">
+              Rapid access to clinical guidelines, emergency protocols, and education modules for spinal cord injury nursing. Use the quick-access cards below for bedside reference or ongoing professional development.
+            </p>
+          </section>
+
+          {/* Quick Access Grid (Clinical) */}
+          <section className="mb-10">
+            <h2 className="text-xl font-semibold mb-4">Clinical Quick Access</h2>
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {quickAccess.map((item) => (
+                <QuickAccessCard key={item.href} {...item} />
+              ))}
+            </div>
+          </section>
+
+          {/* Education/Training Quick Links */}
+          <section className="mb-10">
+            <h2 className="text-xl font-semibold mb-4">Education & Training</h2>
+            <div className="flex flex-wrap gap-4">
+              {educationLinks.map((item) => (
+                <QuickAccessCard key={item.href} {...item} className="w-48" />
+              ))}
+            </div>
+          </section>
+        </main>
+
+        {/* Emergency Button (always visible, floating) */}
+        <Link href="/emergency" className="fixed bottom-6 right-6 z-50">
+          <button className="rounded-full bg-red-600 text-white shadow-lg px-6 py-4 text-lg font-bold flex items-center gap-2 min-w-[80px] min-h-[80px]">
+            <AlertTriangle className="h-6 w-6" />
+            Emergency
+          </button>
         </Link>
 
-        <Link href="/resources">
-          <Card className="transition-colors hover:bg-accent cursor-pointer border-destructive/50">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-base font-medium">Emergency Protocols</CardTitle>
-              <AlertTriangle className="h-4 w-4 text-destructive" />
-            </CardHeader>
-            <CardContent>
-              <CardDescription>Quick access to critical procedures</CardDescription>
-            </CardContent>
-          </Card>
-        </Link>
-      </div>
-
-      {/* KPI Metrics */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardDescription>Total Modules</CardDescription>
-            <CardTitle className="text-4xl">{totalModules}</CardTitle>
-          </CardHeader>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardDescription>Completed</CardDescription>
-            <CardTitle className="text-4xl">{completedModules}</CardTitle>
-          </CardHeader>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardDescription>Pending Quizzes</CardDescription>
-            <CardTitle className="text-4xl">{pendingQuizzes}</CardTitle>
-          </CardHeader>
-        </Card>
-      </div>
-
-      {/* Recent Modules Preview */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium">Recent Modules</h3>
-          <Link href="/modules" className="text-sm text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        <div className="grid gap-3">
-          {recentModules.map((module) => (
-            <Link key={module.module_id} href={`/modules/${module.module_id}`}>
-              <Card className="transition-colors hover:bg-accent cursor-pointer">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="space-y-1">
-                      <CardDescription className="text-xs uppercase">{module.category}</CardDescription>
-                      <CardTitle className="text-base">{module.title}</CardTitle>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-1" />
-                  </div>
-                  <CardDescription className="text-sm">{module.summary}</CardDescription>
-                </CardHeader>
-              </Card>
+        {/* Mobile Bottom Tab Bar */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background border-t flex justify-around items-center h-16 shadow-lg">
+          {mobileTabs.map((tab) => (
+            <Link key={tab.href} href={tab.href} className="flex flex-col items-center justify-center flex-1 h-full text-xs">
+              {tab.icon}
+              <span>{tab.label}</span>
             </Link>
           ))}
-        </div>
+        </nav>
+
+        {/* Footer */}
+        <footer className="px-6 py-4 border-t bg-background text-xs text-muted-foreground text-center mt-auto">
+          &copy; {new Date().getFullYear()} SpinalSync. All rights reserved.
+        </footer>
       </div>
     </div>
   )
