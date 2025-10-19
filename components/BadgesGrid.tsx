@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react"
 import type { Badge } from "@/lib/types"
 import { BadgeCard } from "@/components/badge-card"

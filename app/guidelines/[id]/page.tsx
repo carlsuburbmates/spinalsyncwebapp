@@ -2,14 +2,15 @@ import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 // import { ClinicalChecklist } from "@/components/clinical-checklist"; // To be implemented
 // import { QuickRefCard } from "@/components/quick-ref-card"; // To be implemented
-import guidelines, { Guideline } from "../../../lib/guidelines-data";
+import guidelines, { Guideline } from "@/lib/guidelines-data";
 
-interface GuidelinePageProps {
-  params: { id: string };
-}
-
-export default function GuidelinePage({ params }: GuidelinePageProps) {
-  const guideline = guidelines.find((g: Guideline) => g.id === params.id);
+export default async function GuidelinePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const guideline = guidelines.find((g: Guideline) => g.id === id);
   if (!guideline) return notFound();
 
   return (
