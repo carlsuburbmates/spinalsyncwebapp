@@ -7,11 +7,11 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "test": "vitest"
-    ,
+    "test": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "agent:link": "ts-node scripts/agent-link.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -83,6 +83,7 @@
     "jsdom": "^27.0.0",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
+    "ts-node": "^10.9.2",
     "tw-animate-css": "1.3.3",
     "typescript": "^5",
     "vitest": "^3.2.4"
